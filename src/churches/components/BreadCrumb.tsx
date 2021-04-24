@@ -12,7 +12,7 @@ interface Props {
   items: BreadCrumbProps[];
 }
 
-export const BreadCrumb: React.FC<Props> = ({ items }) => (
+const BreadCrumb: React.FC<Props> = ({ items }) => (
   <Breadcrumb className="something">
     {items.map((i, index) => (
       <Breadcrumb.Item
@@ -26,3 +26,5 @@ export const BreadCrumb: React.FC<Props> = ({ items }) => (
     ))}
   </Breadcrumb>
 );
+
+export default BreadCrumb;
