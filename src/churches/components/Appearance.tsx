@@ -15,7 +15,7 @@ export const Appearance: React.FC<Props> = (props) => {
   const getLogo = (logoName: string) => {
     const logoSrc = (logoName === "logoLight")
       ? AppearanceHelper.getLogoLight(styles, "/images/sample-logo-header.png")
-      : AppearanceHelper.getLogoLight(styles, "/images/sample-logo-header.png");
+      : AppearanceHelper.getLogoDark(styles, "/images/sample-logo-header.png");
     let logoImg = (styles && logoSrc !== null && logoSrc !== undefined) ? <img src={logoSrc} alt="logo" className="img-fluid" /> : null;
     return logoImg
   }
@@ -39,11 +39,11 @@ export const Appearance: React.FC<Props> = (props) => {
   else return (
     <DisplayBox headerIcon="fas fa-palette" headerText="Church Appearance" editFunction={handleEdit}>
 
-      <div style={{ padding: 5, fontWeight: "bold", textAlign: "center", backgroundColor: "#EEE" }}>
+      <div style={{ padding: 10, fontWeight: "bold", textAlign: "center", backgroundColor: "#EEE" }}>
         {getLogo("logoLight")}
       </div>
 
-      <div style={{ padding: 5, fontWeight: "bold", textAlign: "center", backgroundColor: "#333", color: "#FFF" }}>
+      <div style={{ padding: 10, fontWeight: "bold", textAlign: "center", backgroundColor: "#333", color: "#FFF" }}>
         {getLogo("logoDark")}
       </div>
 

@@ -19,4 +19,48 @@ export class AppearanceHelper {
     return (appearanceSettings?.logoLight) ? appearanceSettings.logoLight : defaultLogo;
   }
 
+  public static getLogo(appearanceSettings: AppearanceInterface, defaultLogo: string, backgroundColor: string) {
+    const isDark = (appearanceSettings.logoDark) ? this.isDark(backgroundColor) : false;
+    if (isDark) return this.getLogoDark(appearanceSettings, defaultLogo);
+    else return this.getLogoLight(appearanceSettings, defaultLogo);
+  }
+
+  private static isDark(backgroundColor: string) {
+    let valid = false;
+    let r = 0;
+    let g = 0;
+    let b = 0;
+
+    if (backgroundColor.match(/#[0-9a-fA-F{6}]/)) {
+      r = this.getHexValue(backgroundColor.substring(1, 2));
+      g = this.getHexValue(backgroundColor.substring(3, 4));
+      b = this.getHexValue(backgroundColor.substring(5, 6));
+      valid = true;
+    } else if (backgroundColor.match(/#[0-9a-fA-F{3}]/)) {
+      r = this.getHexValue(backgroundColor.substring(1, 1));
+      g = this.getHexValue(backgroundColor.substring(2, 2));
+      b = this.getHexValue(backgroundColor.substring(3, 3));
+      valid = true;
+    }
+
+    if (!valid) return false;
+    else {
+      //HSP brightness formula.  Some colors have a bigger impact on our perceived brightness than others.
+      const rWeight = .299 * Math.pow(r, 2);
+      const gWeight = .587 * Math.pow(g, 2);
+      const bWeight = .114 * Math.pow(b, 2);
+      const brightness = Math.sqrt(rWeight + gWeight + bWeight);
+      //return brightness < 128;  //
+      return brightness < 156;
+    }
+
+  }
+
+  private static getHexValue(hex: string) {
+    let result = parseInt(hex, 16);
+    if (hex.length === 1) result = result * 16;
+    console.log("HEX: " + hex + " = " + result.toString())
+    return result;
+  }
+
 }

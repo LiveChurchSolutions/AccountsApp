@@ -141,7 +141,7 @@ export const LoginPage: React.FC<Props> = (props) => {
   }
   return (
     <div className="smallCenterBlock">
-      <img src={props.logo || "/images/logo-login.png"} alt="logo" className="img-fluid" style={{ width: "100%" }} />
+      <img src={props.logo || "/images/logo.png"} alt="logo" className="img-fluid" style={{ width: "100%", marginTop: 100, marginBottom: 60 }} />
       <ErrorMessages errors={errors} />
       {getWelcomeBack()}
       <div id="loginBox">
