@@ -1,0 +1,17 @@
+#Update values and rename to .env
+PORT=3401
+
+REACT_APP_ACCESS_API=https://accessapi.staging.churchapps.org
+REACT_APP_GIVING_API=https://givingapi.staging.churchapps.org
+REACT_APP_MEMBERSHIP_API=https://membershipapi.staging.churchapps.org
+
+REACT_APP_STREAMINGLIVE_API=https://api.staging.streaminglive.church
+REACT_APP_STREAMINGLIVE_URL=https://{key}.staging.streaminglive.church
+
+REACT_APP_CHUMS_URL=https://app.staging.chums.org
+REACT_APP_CHURCH_APPS_URL=https://staging.churchapps.org
+
+REACT_APP_B1_API=https://api.staging.b1.church
+REACT_APP_B1_URL=https://app.staging.b1.church
+
+REACT_APP_CONTENT_ROOT=https://app.staging.chums.org
