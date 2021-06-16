@@ -1,9 +1,5 @@
 name: Run Lint
-on:
-  pull_request:
-  pull_request_target:
-  push:
-    branches: [main]
+on: [push, pull_request, pull_request_target]
 
 jobs:
   run-lint:
