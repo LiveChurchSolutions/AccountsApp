@@ -1,8 +1,8 @@
 import { ApiHelper } from "../appBase/helpers/ApiHelper";
 
 export class EnvironmentHelper {
-  static StreamingLiveUrl = '';
-  static ChumsUrl = '';
+  static StreamingLiveUrl = "";
+  static ChumsUrl = "";
   static B1Url = "";
   static churchAppsUrl = "";
   static ContentRoot = "";
@@ -16,9 +16,9 @@ export class EnvironmentHelper {
 
   static init = () => {
     switch (process.env.REACT_APP_STAGE) {
-      case "staging": EnvironmentHelper.initStaging(); break;
-      case "prod": EnvironmentHelper.initProd(); break;
-      default: EnvironmentHelper.initDev(); break;
+    case "staging": EnvironmentHelper.initStaging(); break;
+    case "prod": EnvironmentHelper.initProd(); break;
+    default: EnvironmentHelper.initDev(); break;
     }
     ApiHelper.apiConfigs = [
       { keyName: "AccessApi", url: EnvironmentHelper.AccessApi, jwt: "", permisssions: [] },
