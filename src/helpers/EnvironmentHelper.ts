@@ -2,7 +2,7 @@ import { ApiHelper } from "../appBase/helpers/ApiHelper";
 
 export class EnvironmentHelper {
   static StreamingLiveUrl = '';
-  static ChumsUrl = "";
+  static ChumsUrl = '';
   static B1Url = "";
   static churchAppsUrl = "";
   static ContentRoot = "";
