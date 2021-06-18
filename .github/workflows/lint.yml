@@ -33,4 +33,4 @@ jobs:
           auto_fix: true
           git_name: Lint Actions
           git_email: actions@github.com
-          eslint_extensions: js,ts,tsx
+          eslint_extensions: ts,tsx
