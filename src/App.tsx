@@ -9,6 +9,8 @@ console.log("this should work")
 
 console.log("commit this")
 
+console.log("are you gonna fail?")
+
 const App: React.FC = () => (
   <UserProvider>
     <CookiesProvider>
