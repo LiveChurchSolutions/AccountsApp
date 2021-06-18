@@ -5,7 +5,22 @@ import { UserProvider } from "./UserContext"
 import { Routing } from "./Routing";
 import { CookiesProvider } from "react-cookie"
 
-console.log("something to correct")
+
+
+
+
+
+
+
+
+
+          console.log("something to correct")
+
+
+
+
+
+
 
 const App: React.FC = () => (
   <UserProvider>
