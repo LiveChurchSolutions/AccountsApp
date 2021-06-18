@@ -5,6 +5,15 @@ import { UserProvider } from "./UserContext"
 import { Routing } from "./Routing";
 import { CookiesProvider } from "react-cookie"
 
+
+
+
+
+
+
+      console.log('this should work')
+
+
 const App: React.FC = () => (
   <UserProvider>
     <CookiesProvider>
