@@ -7,6 +7,8 @@ import { CookiesProvider } from "react-cookie"
 
 console.log("something to correct")
 
+console.log("this will work")
+
 const App: React.FC = () => (
   <UserProvider>
     <CookiesProvider>
