@@ -194,6 +194,7 @@ export const UserAdd: React.FC<Props> = (props) => {
               person={selectedPerson || linkedPerson }
               handleAssociatePerson={handleAssociatePerson}
               searchStatus={handleSearchStatus}
+              filterList={props.roleMembers.map(rm => rm.personId)}
             />
           </FormGroup>
         )

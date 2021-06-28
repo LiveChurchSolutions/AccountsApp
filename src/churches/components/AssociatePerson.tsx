@@ -6,9 +6,10 @@ interface Props {
     person: PersonInterface,
     handleAssociatePerson: (person: PersonInterface) => void,
     searchStatus: (value: boolean) => void,
+    filterList?: string[]
 }
 
-export const AssociatePerson: React.FC<Props> = ({ person, handleAssociatePerson, searchStatus }) => {
+export const AssociatePerson: React.FC<Props> = ({ person, handleAssociatePerson, searchStatus, filterList }) => {
   const [showSearchPerson, setShowSearchPerson] = useState<boolean>(false);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
 
@@ -25,7 +26,7 @@ export const AssociatePerson: React.FC<Props> = ({ person, handleAssociatePerson
     searchStatus(hasSearched);
   }, [hasSearched, searchStatus])
 
-  if (!person || showSearchPerson) return <PersonAdd getPhotoUrl={PersonHelper.getPhotoUrl} addFunction={handleAssociatePerson} searchClicked={searchClicked} />;
+  if (!person || showSearchPerson) return <PersonAdd getPhotoUrl={PersonHelper.getPhotoUrl} addFunction={handleAssociatePerson} searchClicked={searchClicked} filterList={filterList} />;
   return (
     <Table size="sm">
       <tbody>
