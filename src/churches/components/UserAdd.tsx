@@ -54,7 +54,9 @@ export const UserAdd: React.FC<Props> = (props) => {
         return;
       }
       const user = await createUserAndToGroup(name, email);
-      await createPerson(user.id);
+      const person = await createPerson(user.id);
+      await linkUserAndPerson(user.id, person.id)
+
       props.updatedFunction();
       return;
     }
@@ -66,14 +68,16 @@ export const UserAdd: React.FC<Props> = (props) => {
     if (!selectedPerson) return;
     const userEmail = showEmailField ? email : selectedPerson.contactInfo.email;
     const user = await createUserAndToGroup(selectedPerson.name.display, userEmail);
+    await linkUserAndPerson(user.id, selectedPerson.id);
+
     // selectedPerson is already associated with a user
-    if (user.id !== selectedPerson.userId) {
-      selectedPerson.userId = user.id;
-      if (showEmailField && !editMode) {
-        selectedPerson.contactInfo.email = email;
-      }
-      await ApiHelper.post("/people", [selectedPerson], "MembershipApi");
-    }
+    // if (user.id !== selectedPerson.userId) {
+    //   selectedPerson.userId = user.id;
+    //   if (showEmailField && !editMode) {
+    //     selectedPerson.contactInfo.email = email;
+    //   }
+    //   await ApiHelper.post("/people", [selectedPerson], "MembershipApi");
+    // }
     props.updatedFunction();
 
   }
@@ -84,6 +88,10 @@ export const UserAdd: React.FC<Props> = (props) => {
     if (!ValidateHelper.email(email)) warnings.push("Enter a valid Email");
     setErrors(warnings);
     return warnings.length > 0;
+  }
+
+  const linkUserAndPerson = async (userId: string, personId: string) => {
+    await ApiHelper.post(`/userchurch?userId=${userId}`, { personId }, "AccessApi");
   }
 
   const createUserAndToGroup = async (userName: string, userEmail: string) => {
@@ -101,8 +109,7 @@ export const UserAdd: React.FC<Props> = (props) => {
 
     const names = name.split(" ");
     const personRecord: PersonInterface = { householdId: households[0].id, name: { first: names[0], last: names[1] }, userId, contactInfo: { email } }
-    const person = await ApiHelper.post("/people", [personRecord], "MembershipApi")
-    await ApiHelper.post(`/userchurch?userId=${userId}`, { personId: person[0].id }, "AccessApi");
+    const person: PersonInterface[] = await ApiHelper.post("/people", [personRecord], "MembershipApi")
 
     return person[0];
   }
@@ -139,12 +146,6 @@ export const UserAdd: React.FC<Props> = (props) => {
   // TODO: gotta verify the same for linking record instead of creating new one.
 
   const handleAssociatePerson = (person: PersonInterface) => {
-    const filteredUser = props.roleMembers.filter(r => r.userId === person.userId);
-    if (!editMode && filteredUser.length > 0) {
-      window.alert("There already exist a role member associating with this person.");
-      props.updatedFunction();
-      return;
-    }
     setSelectedPerson(person);
     if (editMode && person.userId && person.userId !== fetchedUser.id) {
       setErrors([<><b>{person?.name.display}</b> is already linked with other user. Press <b>save</b> only if you are sure about removing that link and associate it to <b>{email}</b>.</>])
